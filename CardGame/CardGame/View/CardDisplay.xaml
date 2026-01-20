@@ -12,8 +12,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Content="{Binding name}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Label Grid.Column="1" Content="{Binding action}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label Grid.Column="2" Content="{Binding value}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Content="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Grid.Column="1" Content="{Binding Action}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Column="2" Content="{Binding Value}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>
