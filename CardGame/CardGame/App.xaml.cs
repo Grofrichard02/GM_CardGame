@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows;
 using CardGame.Model;
+using CardGame.View;
 using CardGame.ViewModel;
 
 namespace CardGame
@@ -14,6 +15,7 @@ namespace CardGame
         private MainWindow _window;
         private CardGameViewModel _viewModel;
         private CardGameModel _model;
+        private CombatPage _combatPage;
         public App()
         {
             Startup += App_Startup;
@@ -25,6 +27,7 @@ namespace CardGame
             _model = new CardGameModel();
             _viewModel = new CardGameViewModel(_model);
             _window.DataContext = _viewModel;
+            _window.Content = _combatPage;
             _window.Show();
         }
     }
