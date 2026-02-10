@@ -26,6 +26,7 @@ namespace CardGame
             _window = new MainWindow();
             _model = new CardGameModel();
             _viewModel = new CardGameViewModel(_model);
+            _combatPage= new CombatPage();
             _window.DataContext = _viewModel;
             _window.Content = _combatPage;
             _window.Show();

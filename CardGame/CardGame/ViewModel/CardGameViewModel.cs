@@ -7,7 +7,7 @@ using CardGame.Model;
 
 namespace CardGame.ViewModel
 {
-    public class CardGameViewModel
+    public class CardGameViewModel : ViewModelBase
     {
         private CardGameModel _model;
 
