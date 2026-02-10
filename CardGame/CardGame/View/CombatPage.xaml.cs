@@ -18,7 +18,7 @@ namespace CardGame.View
     /// <summary>
     /// Interaction logic for CombatPage.xaml
     /// </summary>
-    public partial class CombatPage : Page
+    public partial class CombatPage : UserControl
     {
         public CombatPage()
         {
