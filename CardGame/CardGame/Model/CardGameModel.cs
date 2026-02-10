@@ -38,7 +38,7 @@ namespace CardGame.Model
             CardUseEvent?.Invoke(this, EventArgs.Empty);
 
         }
-        public void NextRound(object? index)
+        public void NextRound()
         {
             Card card = _minion.NextCard;
             if (card.Action==Actions.Attack)

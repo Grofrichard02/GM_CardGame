@@ -1,5 +1,6 @@
 ﻿using System;
 using CardGame.Model;
+using CommunityToolkit.Mvvm.Input;
 
 namespace CardGame.ViewModel
 {
@@ -48,8 +49,8 @@ namespace CardGame.ViewModel
         public Card Card2 => Player.Card2;
         public Card Card3 => Player.Card3;
 
-        public DelegateCommand UseCardCommand { get; set; }
-        public DelegateCommand NextRoundCommand { get; set; }
+        public RelayCommand<object> UseCardCommand { get; set; }
+        public RelayCommand NextRoundCommand { get; set; }
 
         private void model_NextRoundEvent(object? sender, EventArgs e)
         {
@@ -79,8 +80,8 @@ namespace CardGame.ViewModel
             _model.CardUseEvent += model_CardUse;
             _model.NextRoundEvent += model_NextRoundEvent;
 
-            UseCardCommand = new DelegateCommand(param => _model.PlayerCardUse(param));
-            NextRoundCommand = new DelegateCommand(_ => _model.NextRound());
+            UseCardCommand = new RelayCommand<object>(param => _model.PlayerCardUse(param));
+            NextRoundCommand = new RelayCommand(_model.NextRound);
         }
     }
 }

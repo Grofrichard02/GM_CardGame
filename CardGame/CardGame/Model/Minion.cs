@@ -48,6 +48,8 @@ namespace CardGame.Model
         private void GenerateDeck()
         {
             _cards[0]=(new Card("Basic Attack", Actions.Attack, 5));
+            _cards[1] = (new Card("Heal", Actions.Heal, 3));
+            _cards[2] = (new Card("Shield", Actions.Shield, 3));
         }
 
         private void PickNextCard()
