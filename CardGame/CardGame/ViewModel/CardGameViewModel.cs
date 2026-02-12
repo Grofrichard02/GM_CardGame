@@ -8,36 +8,14 @@ namespace CardGame.ViewModel
     {
         private CardGameModel _model;
 
-        private bool _enabled1;
-        private bool _enabled2;
-        private bool _enabled3;
+        private bool _enabled;
 
-        public bool Enabled1
+        public bool Enabled
         {
-            get => _enabled1;
+            get => _enabled;
             set
             {
-                _enabled1 = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Enabled2
-        {
-            get => _enabled2;
-            set
-            {
-                _enabled2 = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Enabled3
-        {
-            get => _enabled3;
-            set
-            {
-                _enabled3 = value;
+                _enabled = value;
                 OnPropertyChanged();
             }
         }
@@ -54,16 +32,12 @@ namespace CardGame.ViewModel
 
         private void model_NextRoundEvent(object? sender, EventArgs e)
         {
-            Enabled1 = true;
-            Enabled2 = true;
-            Enabled3 = true;
+            Enabled = true;
         }
 
         private void model_CardUse(object? sender, EventArgs e)
         {
-            Enabled1 = false;
-            Enabled2 = false;
-            Enabled3 = false;
+            Enabled = false;
             OnPropertyChanged(nameof(Card1));
             OnPropertyChanged(nameof(Card2));
             OnPropertyChanged(nameof(Card3));
@@ -73,9 +47,7 @@ namespace CardGame.ViewModel
         {
             _model = model;
 
-            Enabled1 = true;
-            Enabled2 = true;
-            Enabled3 = true;
+            Enabled = true;
 
             _model.CardUseEvent += model_CardUse;
             _model.NextRoundEvent += model_NextRoundEvent;

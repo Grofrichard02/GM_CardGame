@@ -21,12 +21,12 @@
             <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ContentControl
-        Grid.Row="1"
-        Grid.Column="0"
-        Grid.ColumnSpan="2"
-        Content="{Binding Player}">
 
+        <ContentControl
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Content="{Binding Player}">
             <ContentControl.ContentTemplate>
                 <DataTemplate>
                     <local:EntityDisplay />
@@ -35,18 +35,18 @@
         </ContentControl>
 
         <ContentControl
-        Grid.Row="1"
-        Grid.Column="3"
-        Grid.ColumnSpan="2"
-        Content="{Binding Enemy}">
-
+            Grid.Row="1"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Content="{Binding Enemy}">
             <ContentControl.ContentTemplate>
                 <DataTemplate>
                     <local:EntityDisplay />
                 </DataTemplate>
             </ContentControl.ContentTemplate>
         </ContentControl>
-        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" >
+
+        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1">
             <ContentControl Content="{Binding Card1}">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>
@@ -55,12 +55,13 @@
                 </ContentControl.ContentTemplate>
             </ContentControl>
             <Button
-        Content="Use"
-        Command="{Binding UseCardCommand}"
-        CommandParameter="0"
-        IsEnabled="{Binding Enabled1}" />
+                Content="Use"
+                Command="{Binding UseCardCommand}"
+                CommandParameter="0"
+                IsEnabled="{Binding Enabled}" />
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="2" >
+
+        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="2">
             <ContentControl Content="{Binding Card2}">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>
@@ -69,13 +70,13 @@
                 </ContentControl.ContentTemplate>
             </ContentControl>
             <Button
-        Content="Use"
-        Command="{Binding UseCardCommand}"
-        CommandParameter="1"
-        IsEnabled="{Binding Enabled2}" />
-            
+                Content="Use"
+                Command="{Binding UseCardCommand}"
+                CommandParameter="1"
+                IsEnabled="{Binding Enabled}" />
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="3" >
+
+        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="3">
             <ContentControl Content="{Binding Card3}">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>
@@ -84,27 +85,15 @@
                 </ContentControl.ContentTemplate>
             </ContentControl>
             <Button
-        Content="Use"
-        Command="{Binding UseCardCommand}"
-        CommandParameter="2"
-        IsEnabled="{Binding Enabled3}" />
-        </StackPanel>
-        <Button  Grid.Column="4" Grid.Row="2" Content="Next Round" Command="{Binding NextRoundCommand}"/>
-
-
-        <StackPanel Grid.Column="1" Grid.Row="2">
+                Content="Use"
+                Command="{Binding UseCardCommand}"
+                CommandParameter="2"
+                IsEnabled="{Binding Enabled}" />
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Grid.Row="2">
-        </StackPanel>
-
-		<StackPanel Grid.Column="3" Grid.Row="2">
-			
-		</StackPanel>
-
-		<Button Grid.Column="4"
+        <Button Grid.Column="4"
                 Grid.Row="2"
                 Content="Next Round"
                 Command="{Binding NextRoundCommand}"/>
-	</Grid>
+    </Grid>
 </Page>
