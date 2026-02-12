@@ -26,7 +26,9 @@ namespace CardGame.Model
         {
             _name = "Hero";
             _health = 100;
+            _maxHealth = _health;
             _shield = 10;
+            _dead = false;
         }
 
         private void GenerateDeck()
@@ -61,39 +63,88 @@ namespace CardGame.Model
 
         public void UseCard(int index)
         {
-            if (_currentHand[index].Action == Actions.Heal)
+            if (!_dead)
             {
-                _health += _currentHand[index].Value;
-            }
-            else if (_currentHand[index].Action == Actions.Shield)
-            {
-                _shield += _currentHand[index].Value;
-            }
+                if (_currentHand[index].Action == Actions.Heal)
+                {
+                    _health += _currentHand[index].Value;
+                    if (_health > _maxHealth)
+                        _health = _maxHealth;
+                }
+                else if (_currentHand[index].Action == Actions.Shield)
+                {
+                    _shield += _currentHand[index].Value;
+                }
 
-            OnPropertyChanged(nameof(Health));
-
-            _currentHand[index] = new Card("", Actions.Empty, 0);
+                OnPropertyChanged(nameof(Health));
+                _currentHand[index] = new Card("", Actions.Empty, 0);
+            }
         }
 
         public void Damage(int damage)
         {
-            if (_shield >= damage)
+            if (!_dead)
             {
-                _shield -= damage;
-            }
-            else
-            {
-                damage -= _shield;
-                _shield = 0;
-                _health -= damage;
-            }
+                if (_shield >= damage)
+                {
+                    _shield -= damage;
+                }
+                else
+                {
+                    damage -= _shield;
+                    _shield = 0;
+                    _health -= damage;
+                }
 
-            OnPropertyChanged(nameof(Health));
+                if (_health <= 0)
+                {
+                    _health = 0;
+                    _dead = true;
+                }
+
+                OnPropertyChanged(nameof(Health));
+                OnPropertyChanged(nameof(Dead));
+            }
         }
 
         public Card GetCard(int index)
         {
             return _currentHand[index];
+        }
+
+        public void AddCardToDeck(Card card)
+        {
+            Card[] newCards = new Card[_cards.Length + 1];
+
+            for (int i = 0; i < _cards.Length; i++)
+            {
+                newCards[i] = _cards[i];
+            }
+
+            newCards[newCards.Length - 1] = card;
+            _cards = newCards;
+        }
+
+        public void AddShield(int amount)
+        {
+            _shield += amount;
+            OnPropertyChanged(nameof(Health));
+        }
+
+        public void AddHealth(int amount)
+        {
+            _health += amount;
+
+            if (_health > _maxHealth)
+                _health = _maxHealth;
+
+            OnPropertyChanged(nameof(Health));
+        }
+
+        public void IncreaseMaxHealth(int amount)
+        {
+            _maxHealth += amount;
+            OnPropertyChanged(nameof(Health));
         }
     }
 }
