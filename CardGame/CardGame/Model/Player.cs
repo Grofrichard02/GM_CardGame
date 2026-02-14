@@ -80,33 +80,6 @@ namespace CardGame.Model
                 _currentHand[index] = new Card("", Actions.Empty, 0);
             }
         }
-
-        public void Damage(int damage)
-        {
-            if (!_dead)
-            {
-                if (_shield >= damage)
-                {
-                    _shield -= damage;
-                }
-                else
-                {
-                    damage -= _shield;
-                    _shield = 0;
-                    _health -= damage;
-                }
-
-                if (_health <= 0)
-                {
-                    _health = 0;
-                    _dead = true;
-                }
-
-                OnPropertyChanged(nameof(Health));
-                OnPropertyChanged(nameof(Dead));
-            }
-        }
-
         public Card GetCard(int index)
         {
             return _currentHand[index];
