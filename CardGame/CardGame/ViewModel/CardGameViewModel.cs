@@ -21,11 +21,26 @@ namespace CardGame.ViewModel
         }
 
         public Player Player => _model.Player;
-        public Minion Enemy => _model.Minion;
+        public Entity Enemy => _model.Enemy;  
 
         public Card Card1 => Player.Card1;
         public Card Card2 => Player.Card2;
         public Card Card3 => Player.Card3;
+
+        public string UntilBoss
+        {
+            get
+            {
+                int roundsLeft = 5 - _model.Rounds;
+
+                if (roundsLeft <= 0)
+                {
+                    return string.Empty;  
+                }
+
+                return $"{roundsLeft} round left until Boss";
+            }
+        }
 
         public RelayCommand<object> UseCardCommand { get; set; }
         public RelayCommand NextRoundCommand { get; set; }
@@ -33,6 +48,7 @@ namespace CardGame.ViewModel
         private void model_NextRoundEvent(object? sender, EventArgs e)
         {
             Enabled = true;
+            OnPropertyChanged(nameof(UntilBoss));  
         }
 
         private void model_CardUse(object? sender, EventArgs e)
@@ -41,6 +57,8 @@ namespace CardGame.ViewModel
             OnPropertyChanged(nameof(Card1));
             OnPropertyChanged(nameof(Card2));
             OnPropertyChanged(nameof(Card3));
+            OnPropertyChanged(nameof(Enemy));  
+            OnPropertyChanged(nameof(UntilBoss));  
         }
 
         public CardGameViewModel(CardGameModel model)
