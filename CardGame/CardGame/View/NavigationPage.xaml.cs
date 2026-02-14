@@ -17,7 +17,7 @@ namespace CardGame.View
     /// <summary>
     /// Interaction logic for NavigationPage.xaml
     /// </summary>
-    public partial class NavigationPage : Window
+    public partial class NavigationPage : Page
     {
         public NavigationPage()
         {
