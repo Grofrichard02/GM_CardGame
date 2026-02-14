@@ -1,0 +1,66 @@
+﻿<Page x:Class="CardGame.View.MenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CardGame.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MenuPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Content="Maze Runner"
+               FontSize="32"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontWeight="Bold"/>
+
+        <Button Grid.Row="1"
+                Content="Easy"
+                Width="200"
+                Height="50"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding SetDifficultyCommand}"
+                CommandParameter="Easy"
+                IsEnabled="{Binding Easy}" />
+
+        <Button Grid.Row="2"
+                Content="Medium"
+                Width="200"
+                Height="50"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding SetDifficultyCommand}"
+                CommandParameter="Medium"
+                IsEnabled="{Binding Medium}" />
+
+        <Button Grid.Row="3"
+                Content="Hard"
+                Width="200"
+                Height="50"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding SetDifficultyCommand}"
+                CommandParameter="Hard"
+                IsEnabled="{Binding Hard}" />
+
+        <Button Grid.Row="4"
+                Content="Play"
+                Width="200"
+                Height="50"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding PlayCommand}" />
+
+    </Grid>
+</Page>
