@@ -17,6 +17,8 @@ namespace CardGame
         private NavigationPage _navigationPage;
         private Player _player;
 
+        private double _difficulty = 1.0;
+
         public App()
         {
             Startup += App_Startup;
@@ -48,9 +50,15 @@ namespace CardGame
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
+            if (e.Args.Length > 0 && double.TryParse(e.Args[0], out double diff))
+            {
+                _difficulty = diff;
+            }
+
             _window = new MainWindow();
             _player = new Player();
-            _model = new CardGameModel(_player);
+
+            _model = new CardGameModel(_player, _difficulty);
             _viewModel = new CardGameViewModel(_model);
             _combatPage = new CombatPage();
 

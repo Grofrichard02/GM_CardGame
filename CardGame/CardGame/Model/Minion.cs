@@ -43,11 +43,9 @@ namespace CardGame.Model
         {
             _name = attributes[random.Next(attributes.Length)] + " " + enemytype[random.Next(enemytype.Length)];
 
-            // Health difficulty alapján
             _maxHealth = (int)(random.Next(21, 50) * _difficulty);
             _health = _maxHealth;
 
-            // Shield difficulty alapján
             _shield = random.Next(0, 2) == 0 ? 0 : (int)(5 * _difficulty);
             _dead = false;
         }
