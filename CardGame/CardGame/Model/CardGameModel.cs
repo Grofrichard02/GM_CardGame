@@ -13,7 +13,7 @@ namespace CardGame.Model
 
         public Player Player => _player;
         public Entity Enemy => _enemy;  
-        public int Rounds { get; private set; }  
+        public int Rounds { get; set; }  
 
         public event EventHandler? CardUseEvent;
         public event EventHandler? NextRoundEvent;
@@ -24,8 +24,15 @@ namespace CardGame.Model
             _player = player;
             _difficulty = difficulty;  
             _score = 0;  
-            Rounds = 1;  
-            _enemy = new Minion(_difficulty);  
+            Rounds = 0;
+            if (Rounds == 5)
+            {
+                _enemy = new FinalBoss(_difficulty);
+            }
+            else
+            {
+                _enemy = new Minion(_difficulty);
+            }
         }
 
         public void PlayerCardUse(object? index)
@@ -55,16 +62,22 @@ namespace CardGame.Model
             if (_player.Dead || _enemy.Dead)  
             {
                 GameEndEvent?.Invoke(this,
-                    new GameEndEventArgs(_player.Dead, _enemy.Dead));  
+                    new GameEndEventArgs(_player.Dead, _enemy.Dead));
 
-                _enemy = new Minion(_difficulty);  
+                if (Rounds == 5)
+                {
+                    _enemy = new FinalBoss(_difficulty);
+                }
+                else
+                {
+                    _enemy = new Minion(_difficulty);
+                }
             }
         }
 
         public void NextRound()
         {
-            Card card = _enemy.NextCard;  
-
+            Card card = _enemy.NextCard;
             if (card.Action == Actions.Attack)
             {
                 _player.Damage(card.Value);
@@ -78,9 +91,17 @@ namespace CardGame.Model
             if (_player.Dead || _enemy.Dead)  
             {
                 GameEndEvent?.Invoke(this,
-                    new GameEndEventArgs(_player.Dead, _enemy.Dead));  
+                    new GameEndEventArgs(_player.Dead, _enemy.Dead));
 
-                _enemy = new Minion(_difficulty);  
+                if (Rounds == 5)
+                {
+                    _enemy = new FinalBoss(_difficulty);
+                }
+                    else
+                {
+                    _enemy = new Minion(_difficulty);
+                }
+                      
             }
 
             NextRoundEvent?.Invoke(this, EventArgs.Empty);

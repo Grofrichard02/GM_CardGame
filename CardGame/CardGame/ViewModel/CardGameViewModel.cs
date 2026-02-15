@@ -45,13 +45,13 @@ namespace CardGame.ViewModel
         public RelayCommand<object> UseCardCommand { get; set; }
         public RelayCommand NextRoundCommand { get; set; }
 
-        private void model_NextRoundEvent(object? sender, EventArgs e)
+        public void model_NextRoundEvent(object? sender, EventArgs e)
         {
             Enabled = true;
             OnPropertyChanged(nameof(UntilBoss));  
         }
 
-        private void model_CardUse(object? sender, EventArgs e)
+        public void model_CardUse(object? sender, EventArgs e)
         {
             Enabled = false;
             OnPropertyChanged(nameof(Card1));

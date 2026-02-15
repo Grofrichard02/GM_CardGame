@@ -8,6 +8,8 @@ namespace CardGame.ViewModel
     {
         private bool _hasNotChosen;
         private NavigationModel _model;
+        private CardGameModel _cardmodel;
+
 
         public string Name1 => _model.Choice1.Name;
         public string Name2 => _model.Choice2.Name;
@@ -32,9 +34,11 @@ namespace CardGame.ViewModel
 
         public event EventHandler? ExitNavigationEvent;
 
-        public NavigationViewModel(NavigationModel model)
+        public NavigationViewModel(NavigationModel model,CardGameModel cardmodel)
         {
             _model = model;
+            _cardmodel = cardmodel;
+
             _hasNotChosen = true;
 
             ChooseCommand = new RelayCommand<object>(OnChoose);
@@ -63,7 +67,9 @@ namespace CardGame.ViewModel
 
         public void OnExitNavigation()
         {
+            _cardmodel.Rounds += 1;
             ExitNavigationEvent?.Invoke(this, EventArgs.Empty);
+            
         }
     }
 }

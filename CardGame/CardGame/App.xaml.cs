@@ -26,10 +26,11 @@ namespace CardGame
 
         private void ChangeToCombat()
         {
-            _viewModel.Enabled = true;
             _player.GenerateCurrenthand();
-            _window.DataContext = _viewModel;
-            _window.Content = _combatPage;
+            _window.Content = new CombatPage { 
+            DataContext= _viewModel,
+            };
+            
         }
 
         private void ChangeToNavigation(object? sender, GameEndEventArgs e)
@@ -38,7 +39,7 @@ namespace CardGame
             {
                 _navigationViewModel.HasNotChosen = true;
                 _navigationModel.GenerateNewNavigation();
-                _window.DataContext = _navigationViewModel;
+                _navigationPage.DataContext = _navigationViewModel;
                 _window.Content = _navigationPage;
             }
             else if (e.PlayerDead)
@@ -63,7 +64,7 @@ namespace CardGame
             _combatPage = new CombatPage();
 
             _navigationModel = new NavigationModel(_player);
-            _navigationViewModel = new NavigationViewModel(_navigationModel);
+            _navigationViewModel = new NavigationViewModel(_navigationModel,_model);
             _navigationPage = new NavigationPage();
 
             _model.GameEndEvent += ChangeToNavigation;

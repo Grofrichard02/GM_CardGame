@@ -10,21 +10,17 @@ namespace CardGame.ViewModel
 {
     public class MenuViewModel : ViewModelBase
     {
-        // Private adattagok
         private bool _easy;
         private bool _medium;
         private bool _hard;
 
         private double _difficulty;
 
-        // Event
         public event EventHandler<EventArgs> StartGameEvent;
 
-        // RelayCommand-ok
         public RelayCommand<string> SetDifficultyCommand { get; private set; }
         public RelayCommand PlayCommand { get; private set; }
 
-        // Property-k
         public bool Easy
         {
             get => _easy;
@@ -65,7 +61,6 @@ namespace CardGame.ViewModel
             }
         }
 
-        // Konstruktor
         public MenuViewModel()
         {
             SetDifficultyCommand = new RelayCommand<string>(
@@ -76,11 +71,9 @@ namespace CardGame.ViewModel
         () => StartGameEvent?.Invoke(this, EventArgs.Empty)
         );
 
-            // Alapértelmezett nehézség
             ChangeDifficulty("Medium");
         }
 
-        // ChangeDifficulty metódus
         private void ChangeDifficulty(string difficulty)
         {
             switch (difficulty)
