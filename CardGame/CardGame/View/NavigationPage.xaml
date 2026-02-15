@@ -3,56 +3,88 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:CardGame.View"
+      xmlns:local="clr-namespace:CardGame.View" xmlns:viewmodel="clr-namespace:CardGame.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:NavigationViewModel}"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ContentControl
-            Grid.Row="0"
-            Grid.Column="2"
-            Content="{Binding Player}">
+        <ContentControl Grid.Row="0" 
+                        Grid.Column="2"
+                        Content="{Binding Player}">
             <ContentControl.ContentTemplate>
                 <DataTemplate>
-                    <local:EntityDisplay/>
+                    <local:EntityDisplay />
                 </DataTemplate>
             </ContentControl.ContentTemplate>
         </ContentControl>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-            <Label Content="{Binding Name1}" />
-            <Label Content="{Binding Description1}" />
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <Label Content="{Binding Name1}"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+
+            <Label Content="{Binding Description1}"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   Margin="0,5,0,10"/>
+
             <Button Content="Choose"
                     Command="{Binding ChooseCommand}"
                     CommandParameter="1"
-                    IsEnabled="{Binding HasNotChosen}" />
+                    IsEnabled="{Binding HasNotChosen}"
+                    Width="100"
+                    Height="30"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Vertical">
-            <Label Content="{Binding Name2}" />
-            <Label Content="{Binding Description2}" />
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="3"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <Label Content="{Binding Name2}"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+
+            <Label Content="{Binding Description2}"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   Margin="0,5,0,10"/>
+
             <Button Content="Choose"
                     Command="{Binding ChooseCommand}"
-                    CommandParameter="2"
-                    IsEnabled="{Binding HasNotChosen}" />
+                    CommandParameter="2"  
+                IsEnabled="{Binding HasNotChosen}"
+                    Width="100"
+                    Height="30"/>
         </StackPanel>
 
-        <Button Grid.Row="2" Grid.Column="2"
+        <Button Grid.Row="2"
+                Grid.Column="2"
                 Content="Next Battle"
-                Command="{Binding ExitNavigationCommand}" />
+                Command="{Binding ExitNavigationCommand}"
+                Width="150"
+                Height="40"
+                FontSize="14"
+                FontWeight="Bold"/>
     </Grid>
 </Page>

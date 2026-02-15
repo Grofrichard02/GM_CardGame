@@ -11,10 +11,8 @@ namespace CardGame.ViewModel
 
         public string Name1 => _model.Choice1.Name;
         public string Name2 => _model.Choice2.Name;
-
         public string Description1 => _model.Choice1.Description;
         public string Description2 => _model.Choice2.Description;
-
         public Player Player => _model.Player;
 
         public bool HasNotChosen
@@ -27,28 +25,45 @@ namespace CardGame.ViewModel
             }
         }
 
-        public RelayCommand<object> ChooseCommand { get; set; }
-        public RelayCommand ExitNavigationCommand { get; set; }
+        public string UntilBoss => string.Empty;
+
+        public RelayCommand<object> ChooseCommand { get; }
+        public RelayCommand ExitNavigationCommand { get; }
 
         public event EventHandler? ExitNavigationEvent;
-
-        public void OnExitNavigation()
-        {
-            ExitNavigationEvent?.Invoke(this, EventArgs.Empty);
-        }
 
         public NavigationViewModel(NavigationModel model)
         {
             _model = model;
-            HasNotChosen = true;
+            _hasNotChosen = true;
 
-            ChooseCommand = new RelayCommand<object>(param =>
-            {
-                _model.PickChoice(int.Parse(param.ToString()));
-                HasNotChosen = false;
-            });
-
+            ChooseCommand = new RelayCommand<object>(OnChoose);
             ExitNavigationCommand = new RelayCommand(OnExitNavigation);
+        }
+
+        private void OnChoose(object parameter)
+        {
+            int choice = 0;
+
+            if (parameter is string strParam)
+            {
+                int.TryParse(strParam, out choice);
+            }
+            else if (parameter is int intParam)
+            {
+                choice = intParam;
+            }
+
+            if (choice > 0)
+            {
+                _model.PickChoice(choice);
+                HasNotChosen = false;
+            }
+        }
+
+        public void OnExitNavigation()
+        {
+            ExitNavigationEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }

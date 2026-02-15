@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:CardGame.View"
+      xmlns:local="clr-namespace:CardGame.View" xmlns:viewmodel="clr-namespace:CardGame.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:CardGameViewModel}"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       >
@@ -17,17 +17,22 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <Label Grid.Row="0" 
                Grid.Column="1" 
                Grid.ColumnSpan="3"
                Content="{Binding UntilBoss}"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
-               HorizontalContentAlignment="Center"/>
+               HorizontalContentAlignment="Center"
+               FontSize="16"
+               FontWeight="Bold"
+               Margin="10"/>
+
         <ContentControl
             Grid.Row="1"
             Grid.Column="0"
@@ -52,7 +57,7 @@
             </ContentControl.ContentTemplate>
         </ContentControl>
 
-        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1">
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1">
             <ContentControl Content="{Binding Card1}">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>
@@ -64,10 +69,11 @@
                 Content="Use"
                 Command="{Binding UseCardCommand}"
                 CommandParameter="0"
-                IsEnabled="{Binding Enabled}" />
+                IsEnabled="{Binding Enabled}"
+                Margin="5"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="2">
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="2">
             <ContentControl Content="{Binding Card2}">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>
@@ -79,10 +85,11 @@
                 Content="Use"
                 Command="{Binding UseCardCommand}"
                 CommandParameter="1"
-                IsEnabled="{Binding Enabled}" />
+                IsEnabled="{Binding Enabled}"
+                Margin="5"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="3">
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="3">
             <ContentControl Content="{Binding Card3}">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>
@@ -94,12 +101,14 @@
                 Content="Use"
                 Command="{Binding UseCardCommand}"
                 CommandParameter="2"
-                IsEnabled="{Binding Enabled}" />
+                IsEnabled="{Binding Enabled}"
+                Margin="5"/>
         </StackPanel>
 
         <Button Grid.Column="4"
                 Grid.Row="2"
                 Content="Next Round"
-                Command="{Binding NextRoundCommand}"/>
+                Command="{Binding NextRoundCommand}"
+                Margin="5"/>
     </Grid>
 </Page>

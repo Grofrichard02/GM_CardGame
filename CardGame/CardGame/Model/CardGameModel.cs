@@ -7,13 +7,13 @@ namespace CardGame.Model
     public class CardGameModel
     {
         private Player _player;
-        private Entity _enemy;
-        private double _difficulty;
-        private int _score;
+        private Entity _enemy;  
+        private double _difficulty;  
+        private int _score;  
 
         public Player Player => _player;
-        public Entity Enemy => _enemy;
-        public int Rounds { get; private set; }
+        public Entity Enemy => _enemy;  
+        public int Rounds { get; private set; }  
 
         public event EventHandler? CardUseEvent;
         public event EventHandler? NextRoundEvent;
@@ -22,10 +22,10 @@ namespace CardGame.Model
         public CardGameModel(Player player, double difficulty)
         {
             _player = player;
-            _difficulty = difficulty;
-            _score = 0;
-            Rounds = 1;
-            _enemy = new Minion(_difficulty);
+            _difficulty = difficulty;  
+            _score = 0;  
+            Rounds = 1;  
+            _enemy = new Minion(_difficulty);  
         }
 
         public void PlayerCardUse(object? index)
@@ -45,68 +45,42 @@ namespace CardGame.Model
 
             if (card.Action == Actions.Attack)
             {
-                _enemy.Damage(card.Value);
+                _enemy.Damage(card.Value);  
             }
 
             _player.UseCard(cardIndex);
 
             CardUseEvent?.Invoke(this, EventArgs.Empty);
 
-            if (_player.Dead || _enemy.Dead)
+            if (_player.Dead || _enemy.Dead)  
             {
-                if (_enemy.Dead)
-                {
-                    _score += (int)(_enemy.MaxHP * 100 * _difficulty);
-                }
-
                 GameEndEvent?.Invoke(this,
-                    new GameEndEventArgs(_player.Dead, _enemy.Dead, false));
+                    new GameEndEventArgs(_player.Dead, _enemy.Dead));  
 
-                if (Rounds >= 5)
-                {
-                    _enemy = new FinalBoss(_difficulty);
-                }
-                else
-                {
-                    Rounds++;
-                    _enemy = new Minion(_difficulty);
-                }
+                _enemy = new Minion(_difficulty);  
             }
         }
 
         public void NextRound()
         {
-            Card card = _enemy.NextCard;
+            Card card = _enemy.NextCard;  
 
             if (card.Action == Actions.Attack)
             {
                 _player.Damage(card.Value);
             }
 
-            _enemy.UseCard();
+            _enemy.UseCard();  
             _player.GenerateCurrenthand();
 
             CardUseEvent?.Invoke(this, EventArgs.Empty);
 
-            if (_player.Dead || _enemy.Dead)
+            if (_player.Dead || _enemy.Dead)  
             {
-                if (_enemy.Dead)
-                {
-                    _score += (int)(_enemy.MaxHP * 100 * _difficulty);
-                }
-
                 GameEndEvent?.Invoke(this,
-                    new GameEndEventArgs(_player.Dead, _enemy.Dead, false));
+                    new GameEndEventArgs(_player.Dead, _enemy.Dead));  
 
-                if (Rounds >= 5)
-                {
-                    _enemy = new FinalBoss(_difficulty);
-                }
-                else
-                {
-                    Rounds++;
-                    _enemy = new Minion(_difficulty);
-                }
+                _enemy = new Minion(_difficulty);  
             }
 
             NextRoundEvent?.Invoke(this, EventArgs.Empty);
